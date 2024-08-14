@@ -6,16 +6,18 @@
     <title>Clase #1</title>
     <style>
         canvas{
-            background-color: white;
+            background-color: antiquewhite;
         }
     </style>
 </head>
 <body>
-   <canvas id="my_canvas" width="500" height="500"></canvas>
+   <canvas id="my_canvas" width="500" height="600"></canvas>
    <script type="text/javascript">
      const my_canvas = document.getElementById('my_canvas')
      const ctx = my_canvas.getContext('2d')
     
+     ctx.strokeRect(20, 20, 100, 100)
+
      ctx.fillStyle = "#9dff6f"
      ctx.fillRect(100, 100, 100, 100)
 
@@ -24,6 +26,24 @@
 
      ctx.fillStyle = "rgba(255, 2500, 156, 0.5)"
      ctx.fillRect(260, 260, 100, 100)
+
+     ctx.lineWidth = 4;
+     ctx.strokeStyle = "#ff8900"
+     ctx.strokeRect(340, 340, 100, 100)
+
+     ctx.beginPath()
+     ctx.moveTo(320,10)
+     ctx.lineTo(320,150)
+     ctx.closePath();
+     ctx.stroke();
+
+     ctx.beginPath()
+     ctx.moveTo(100,400)
+     ctx.lineTo(140,500)
+     ctx.lineTo(300,500)
+     ctx.closePath();
+     ctx.stroke()
+     ctx.fill()
    </script>
 </body>
 </html>
