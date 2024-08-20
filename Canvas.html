@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-   <canvas id="my_canvas" width="800" height="600"></canvas>
+   <canvas id="my_canvas" width="1200" height="600"></canvas>
    <script type="text/javascript">
      const my_canvas = document.getElementById('my_canvas')
      const ctx = my_canvas.getContext('2d')
@@ -69,6 +69,16 @@
     grd.addColorStop(1, "#8bffef")
     ctx.fillStyle = grd;
     ctx.fillRect(60,330,300,100);
+
+    const rgrd = ctx.createRadialGradient(930, 230, 100, 930, 290, 170);
+
+    rgrd.addColorStop(0, "#ff0000");
+    rgrd.addColorStop(0.3, "#fac457");
+    rgrd.addColorStop(0.5, "#9ffa57");
+    rgrd.addColorStop(0.8, "#57faa8");
+    rgrd.addColorStop(1, "#0061ff");
+    ctx.fillStyle = rgrd;
+    ctx.fillRect(730,100,350,350);
 
 
    </script>
