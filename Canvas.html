@@ -28,20 +28,26 @@
 
      my_canvas.addEventListener("click", function(e){
         ctx.beginPath();
-        ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+        if (figura == 1){
+            ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+        }else if (figura == 2){
+            ctx.fillRect(e.x - 50, e.y - 50, 100, 100)
+        }
         ctx.fill();
         ctx.stroke();
      });
      
      my_canvas.addEventListener("mouseover", function(e){
         ctx.fillStyle = getRandomColor();
-        //ctx.beginPath();
-       // ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
      });
 
      my_canvas.addEventListener("mouseout", function(e){
-        //console.log("hola")
-     });
+        if (figura == 1) {
+            figura = 2;
+        }else{
+            figura = 1
+        }
+    });
      /*
      my_canvas.addEventListener("mousemove", function(e){
         console.log("hola")
