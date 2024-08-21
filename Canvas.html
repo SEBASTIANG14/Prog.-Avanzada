@@ -15,7 +15,37 @@
    <script type="text/javascript">
      const my_canvas = document.getElementById('my_canvas')
      const ctx = my_canvas.getContext('2d')
+     var figura = 1;
+
+     my_canvas.addEventListener("click", function(e){
+        ctx.strokeStyle = "blue"
+        ctx.fillStyle = "crimson"
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+     });
+     
+     my_canvas.addEventListener("mouseover", function(e){
+        console.log(e)
+     });
+
+     my_canvas.addEventListener("mouseout", function(e){
+        console.log("hola")
+     });
+     /*
+     my_canvas.addEventListener("mousemove", function(e){
+        console.log("hola")
+     });
+     my_canvas.addEventListener("mousedown", function(e){
+        console.log("hola")
+     });
+     my_canvas.addEventListener("mouseup", function(e){
+        console.log("hola")
+     });
+     */
     
+     /*
      ctx.strokeRect(20, 20, 100, 100)
 
      ctx.fillStyle = "#9dff6f"
@@ -84,9 +114,9 @@
     imagen.src = "cuteAsta.jpg"
 
     imagen.onload = function(){
-    ctx.drawImage(imagen, 200,500,200,200)
+        ctx.drawImage(imagen, 200,200,200,200)
     }
-
+*/
    </script>
 </body>
 </html>
