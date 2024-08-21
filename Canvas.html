@@ -17,9 +17,16 @@
      const ctx = my_canvas.getContext('2d')
      var figura = 1;
 
+     function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+        return color;
+}
+
      my_canvas.addEventListener("click", function(e){
-        ctx.strokeStyle = "blue"
-        ctx.fillStyle = "crimson"
         ctx.beginPath();
         ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
         ctx.fill();
@@ -27,11 +34,13 @@
      });
      
      my_canvas.addEventListener("mouseover", function(e){
-        console.log(e)
+        ctx.fillStyle = getRandomColor();
+        //ctx.beginPath();
+       // ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
      });
 
      my_canvas.addEventListener("mouseout", function(e){
-        console.log("hola")
+        //console.log("hola")
      });
      /*
      my_canvas.addEventListener("mousemove", function(e){
