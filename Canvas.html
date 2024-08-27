@@ -13,7 +13,8 @@
 <body>
    <canvas id="my_canvas" width="1200" height="600"></canvas>
    <script type="text/javascript">
-     const my_canvas = document.getElementById('my_canvas')
+
+    const my_canvas = document.getElementById('my_canvas')
      const ctx = my_canvas.getContext('2d')
      var figura = 1;
 
@@ -47,6 +48,15 @@
         }else{
             figura = 1
         }
+    });
+
+    my_canvas.addEventListener("mousemove", function (e) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        
     });
      /*
      my_canvas.addEventListener("mousemove", function(e){
