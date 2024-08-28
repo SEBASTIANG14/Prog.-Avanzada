@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            background-color: antiquewhite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="my_canvas" width="600" height="600"></canvas>
+    <img id="images" src="/images.jpg" alt="Descripción de la imagen" style="display:none;">
+
+    <script type>
+        const my_Canvas = document.getElementById("my_canvas");
+        const ctx = my_Canvas.getContext("2d");
+        var color = "black";
+        var move = 10; 
+        var x = 200;
+        var y = 200;
+        var direction = "";
+        var speed = 10;
+
+        ctx.strokeRect(x, y, 100, 100);
+        ctx.fillRect(x, y, 100, 100);
+
+        document.addEventListener("keydown", function(e){
+            
+            if(e.key=="w"){
+                direction = "up"
+            }else if(e.key =="a"){
+                direction = "left"
+            }else if(e.key == "s"){
+                direction = "down"
+            }else if(e.key == "d"){
+                direction = "right"
+            }
+            
+            //pintar();
+            
+        
+        
+        })
+
+    function update(){
+        if(direction == "up"){
+            console.log("arriba")
+            y -= move;
+        }else if(direction == "left"){
+            console.log("izquierda")
+            x -= move;
+        }else if(direction == "down"){
+            console.log("abajo")
+            y += move;
+
+        }else if(direction == "right"){
+            console.log("derecha")
+            x+= move;
+
+            }
+
+    }
+
+    function pintar(){
+        ctx.fillStyle = "antiquewhite";
+            ctx.strokeRect(0, 0, 600, 600);
+            ctx.fillRect(0, 0, 600, 600);
+
+            color = getRandomColor();
+
+            ctx.fillStyle = color;
+            ctx.strokeRect(x, y, 100, 100);
+            ctx.fillRect(x, y, 100, 100);
+            update()
+            requestAnimationFrame(pintar)
+    }
+
+    requestAnimationFrame(pintar)
+
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+        }
+
+    (function () {
+    var requestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
+    })();
+
+
+    </script>
+    
+</body>
+</html>

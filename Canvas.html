@@ -17,6 +17,7 @@
     const my_canvas = document.getElementById('my_canvas')
      const ctx = my_canvas.getContext('2d')
      var figura = 1;
+     var direccion ="";
 
      function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
@@ -49,7 +50,7 @@
             figura = 1
         }
     });
-
+    /*
     my_canvas.addEventListener("mousemove", function (e) {
         const x = e.offsetX;
         const y = e.offsetY;
@@ -58,6 +59,24 @@
         ctx.fill();
         
     });
+    */
+    my_canvas.addEventListener("mousedown", function (e) {
+        
+        const x = e.offsetX;
+        const y = e.offsetY;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        
+    });
+
+    function update(){
+
+    }
+
+    function pintas(){
+
+    }
      /*
      my_canvas.addEventListener("mousemove", function(e){
         console.log("hola")
