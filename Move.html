@@ -40,6 +40,10 @@
             }else if(e.key == "d"){
                 direction = "right"
             }
+            if(e.code == "Space"){
+                speed += 2;
+                console.log(speed)
+            }
             
             //pintar();
             
@@ -49,23 +53,23 @@
 
     function update(){
         if(direction == "up"){
-            y -= move;
+            y -= speed;
                 if(y <= -60){
                     y = 660
                 }
         }else if(direction == "left"){
-            x -= move;
+            x -= speed;
                 if (x <= -60) {
                     x = 660
                 }
         }else if(direction == "down"){
-            y += move;
+            y += speed;
                 if (y >= 660) {
                     y = -60
                 }
 
         }else if(direction == "right"){
-            x+= move;
+            x+= speed;
                 if (x >= 660) {
                     x = -60
                 }
@@ -86,6 +90,7 @@
             ctx.fillRect(x, y, 100, 100);
             update()
             requestAnimationFrame(pintar)
+            fillText()
     }
 
     requestAnimationFrame(pintar)
