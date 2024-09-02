@@ -28,6 +28,105 @@
         return color;
 }
 
+    ctx.font = "60px Georgia";
+    ctx.fillText("Sebastian El Rifle Gorostieta", 400, 80);
+
+    ctx.beginPath();
+        ctx.lineWidth = 2; 
+        ctx.arc(250, 120, 50, 0, Math.PI * 2, true); 
+        ctx.fillStyle = '#FFCC99';
+        ctx.fill();
+        ctx.stroke();
+
+    ctx.beginPath();
+        ctx.arc(250, 50, 70, 0, Math.PI * 1, true); 
+        ctx.fillStyle = '#feffc4';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "#feffc4"
+        ctx.strokeStyle = '#000000';
+        ctx.fillRect(150, 50, 200, 30)
+        ctx.strokeRect(150, 50, 200, 30);
+
+    ctx.beginPath();
+        ctx.arc(234, 110, 5, 0, Math.PI * 2, true); 
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.stroke();
+    ctx.beginPath();
+        ctx.arc(264, 110, 5, 0, Math.PI * 2, true); 
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.stroke();
+    ctx.beginPath();
+        ctx.arc(248, 125, 5, 0, Math.PI * 2, true); 
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.stroke();
+    ctx.beginPath();
+        ctx.arc(248, 145, 20, 0, Math.PI * 1); 
+        ctx.fillStyle = '#000000';
+        ctx.fill();
+        ctx.stroke();
+    ctx.beginPath();
+        ctx.arc(248, 150, 10, 0, Math.PI * 1); 
+        ctx.fillStyle = 'crimson';
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#FFCC99"
+        ctx.fillRect(241, 170, 15, 30)
+
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(160, 490, 50, 20)
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(280, 490, 70, 20)
+        
+        ctx.fillStyle = "#FFCC99"
+        ctx.fillRect(210, 430, 20, 80)
+        ctx.fillStyle = "#FFCC99"
+        ctx.fillRect(280, 430, 20, 80)
+
+        // Dibujar las piernas
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(200, 380, 40, 70)
+        ctx.fillStyle = "#000000"
+        ctx.fillRect(270, 380, 40, 70)
+        
+
+        ctx.beginPath();
+        ctx.ellipse(250, 300, 80, 120, 0, 0, Math.PI * 2); 
+        ctx.fillStyle = '#b5bfcf';
+        ctx.fill();
+        ctx.stroke();
+
+        var imagen = new Image();
+        imagen.src = "horse2.png"
+
+        imagen.onload = function(){
+        ctx.drawImage(imagen, 170,210,150,150)
+        }
+        
+
+        ctx.beginPath();
+        ctx.moveTo(170, 250);
+        ctx.lineTo(110, 300); 
+        ctx.moveTo(330, 250);
+        ctx.lineTo(390, 300); 
+        ctx.lineWidth = 20;
+        ctx.strokeStyle = '#FFCC99'; 
+        ctx.stroke();
+
+
+      
+
+
+
+
+
+
+/*
+
      my_canvas.addEventListener("click", function(e){
         ctx.beginPath();
         if (figura == 1){
@@ -50,7 +149,7 @@
             figura = 1
         }
     });
-    /*
+    
     my_canvas.addEventListener("mousemove", function (e) {
         const x = e.offsetX;
         const y = e.offsetY;
@@ -59,7 +158,7 @@
         ctx.fill();
         
     });
-    */
+    
     my_canvas.addEventListener("mousedown", function (e) {
         
         const x = e.offsetX;
@@ -77,7 +176,7 @@
     function pintas(){
 
     }
-     /*
+     
      my_canvas.addEventListener("mousemove", function(e){
         console.log("hola")
      });
@@ -87,9 +186,9 @@
      my_canvas.addEventListener("mouseup", function(e){
         console.log("hola")
      });
-     */
+     
     
-     /*
+     
      ctx.strokeRect(20, 20, 100, 100)
 
      ctx.fillStyle = "#9dff6f"
