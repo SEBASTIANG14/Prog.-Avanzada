@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mario bros 3</title>
+    <style>
+      canvas {
+        background-color: #a2f0ff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="my_canvas" width="1200" height="600"></canvas>
+    <script type="text/javascript">
+      const my_canvas = document.getElementById("my_canvas");
+      const ctx = my_canvas.getContext("2d");
+      var figura = 1;
+      var direccion = "";
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF".split("");
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.round(Math.random() * 15)];
+        }
+        return color;
+      }
+      //Mario
+      var imagen = new Image();
+      imagen.src = "mariob3.png";
+
+      imagen.onload = function () {
+        ctx.drawImage(imagen, 190, 400, 50, 100);
+      };
+
+      var imagen1 = new Image();
+      imagen1.src = "piraña.png";
+
+      imagen1.onload = function () {
+        ctx.drawImage(imagen1, 745, 160, 150, 150);
+      };
+
+      //Circulo arbusto base
+      ctx.beginPath();
+      ctx.arc(110, 480, 55, 0, Math.PI * 2);
+      ctx.fillStyle = "#218304";
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      //Circulo arbusto tope
+      ctx.beginPath();
+      ctx.arc(120, 440, 35, 0.3, Math.PI * 1, true);
+      ctx.fillStyle = "#218304";
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      //Cuadrado negro 2
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(600, 220, 80, 280);
+      //Cuadrado azul
+      ctx.fillStyle = "#71C2FF";
+      ctx.fillRect(400, 200, 240, 380);
+      //CIRCULITOS CUADRO AZUL
+      //Circulito 1
+      ctx.beginPath();
+      ctx.arc(420, 220, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 2
+      ctx.beginPath();
+      ctx.arc(620, 220, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 3
+      ctx.beginPath();
+      ctx.arc(620, 480, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+
+      //Cuadrado negro 1
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(500, 340, 80, 180);
+
+      //Cuadrado cremita
+      ctx.fillStyle = "#FFC0B5";
+      ctx.fillRect(300, 280, 240, 250);
+      //CIRCULITOS CUADRO CREMITA
+      //Circulito 1
+      ctx.beginPath();
+      ctx.arc(320, 300, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 2
+      ctx.beginPath();
+      ctx.arc(520, 300, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 3
+      ctx.beginPath();
+      ctx.arc(320, 480, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#b3bfc0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 4
+      ctx.beginPath();
+      ctx.arc(520, 480, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+
+      //Cuadrado Verde
+      ctx.fillStyle = "#00DD5B";
+      ctx.fillRect(1000, 280, 290, 250);
+      //CIRCULITOS CUADRADO VERDE
+      //Circulito 1
+      ctx.beginPath();
+      ctx.arc(1020, 480, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Circulito 2
+      ctx.beginPath();
+      ctx.arc(1020, 300, 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#B3BFC0";
+      ctx.fill();
+      ctx.stroke();
+      //Piso
+      ctx.fillStyle = "#FF9766";
+      ctx.fillRect(0, 500, 1200, 100);
+
+      //Cubo 1
+      ctx.fillStyle = "#FC9164";
+      ctx.fillRect(80, 250, 50, 50);
+      //Interrogacion cubo 1
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "60px Georgia";
+      ctx.fillText("?", 91, 295);
+      //Borde cubo 1
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(80, 250, 50, 50);
+
+      //Cubo 2
+      ctx.fillStyle = "#FC9164";
+      ctx.fillRect(180, 50, 50, 50);
+      //Interrogacion cubo 2
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "60px Georgia";
+      ctx.fillText("?", 190, 95);
+      //Borde cubo 2
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(180, 50, 50, 50);
+
+      //Cubo 3
+      ctx.fillStyle = "#FC9164";
+      ctx.fillRect(230, 50, 50, 50);
+      //Interrogacion cubo 3
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "60px Georgia";
+      ctx.fillText("?", 240, 95);
+      //Borde cubo 3
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(230, 50, 50, 50);
+
+      //Cubo 4
+      ctx.fillStyle = "#FC9164";
+      ctx.fillRect(1080, 150, 50, 50);
+      //Interrogacion cubo 4
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "60px Georgia";
+      ctx.fillText("?", 1093, 195);
+      //Borde cubo 4
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(1080, 150, 50, 50);
+
+      //Base tuberia
+      ctx.fillStyle = "#188810";
+      ctx.fillRect(750, 350, 140, 150);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(750, 350, 140, 150);
+      //Parte superior tuberia
+      ctx.fillStyle = "#188810";
+      ctx.fillRect(720, 300, 200, 50);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "#000000";
+      ctx.strokeRect(720, 300, 200, 50);
+    </script>
+  </body>
+</html>
