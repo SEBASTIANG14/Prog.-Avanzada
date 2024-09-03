@@ -1,120 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        canvas{
-            background-color: antiquewhite;
-        }
-
+      canvas {
+        background-color: antiquewhite;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <canvas id="my_canvas" width="600" height="600"></canvas>
-    <img id="images" src="/images.jpg" alt="Descripción de la imagen" style="display:none;">
+    <img
+      id="images"
+      src="/images.jpg"
+      alt="Descripción de la imagen"
+      style="display: none"
+    />
 
     <script type>
-        const my_Canvas = document.getElementById("my_canvas");
-        const ctx = my_Canvas.getContext("2d");
-        var color = "black";
-        var move = 10; 
-        var x = 200;
-        var y = 200;
-        var direction = "";
-        var speed = 10;
+      const my_Canvas = document.getElementById("my_canvas");
+      const ctx = my_Canvas.getContext("2d");
+      var color = "black";
+      var move = 10;
+      var x = 200;
+      var y = 200;
+      var direction = "";
+      var speed = 10;
 
-        ctx.strokeRect(x, y, 100, 100);
-        ctx.fillRect(x, y, 100, 100);
+      class Rectangulo {
+        constructor(x, y, width, height, col, spe) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+          this.col = col;
+          this.spe = spe;
+        }
+        tocar(tocando) {
+          if (
+            this.x < tocando.x + tocando.width &&
+            this.x + this.width > tocando.x &&
+            this.y < tocando.y + tocando.height &&
+            this.y + this.height > tocando.y
+          ) {
+            return true;
+          }
 
-        document.addEventListener("keydown", function(e){
-            
-            if(e.key=="w"){
-                direction = "up"
-            }else if(e.key =="a"){
-                direction = "left"
-            }else if(e.key == "s"){
-                direction = "down"
-            }else if(e.key == "d"){
-                direction = "right"
-            }
-            if(e.code == "Space"){
-                speed += 2;
-                console.log(speed)
-            }
-            
-            //pintar();
-            
-        
-        
-        })
+          return false;
+        }
+      }
 
-    function update(){
-        if(direction == "up"){
-            y -= speed;
-                if(y <= -60){
-                    y = 660
-                }
-        }else if(direction == "left"){
-            x -= speed;
-                if (x <= -60) {
-                    x = 660
-                }
-        }else if(direction == "down"){
-            y += speed;
-                if (y >= 660) {
-                    y = -60
-                }
+      var sebasPJ = new Rectangulo(200, 200, 50, 50, getRandomColor(), 10);
+      var obj = new Rectangulo(100, 100, 50, 50, getRandomColor(), 10);
+      var obst = new Rectangulo(100, 400, 50, 350, getRandomColor(), 10);
 
-        }else if(direction == "right"){
-            x+= speed;
-                if (x >= 660) {
-                    x = -60
-                }
+      document.addEventListener("keydown", function (e) {
+        if (e.key == "w") {
+          direction = "up";
+        } else if (e.key == "a") {
+          direction = "left";
+        } else if (e.key == "s") {
+          direction = "down";
+        } else if (e.key == "d") {
+          direction = "right";
+        }
+        if (e.code == "Space") {
+          sebasPJ.spe += 2;
+          console.log(speed);
+        }
 
-            }
+        //pintar();
+      });
 
-    }
+      function update() {
+        if (direction == "up") {
+          sebasPJ.y -= sebasPJ.spe;
+          if (sebasPJ.y <= -60) {
+            sebasPJ.y = 660;
+          }
+        } else if (direction == "left") {
+          sebasPJ.x -= sebasPJ.spe;
+          if (sebasPJ.x <= -60) {
+            sebasPJ.x = 660;
+          }
+        } else if (direction == "down") {
+          sebasPJ.y += sebasPJ.spe;
+          if (sebasPJ.y >= 660) {
+            sebasPJ.y = -60;
+          }
+        } else if (direction == "right") {
+          sebasPJ.x += sebasPJ.spe;
+          if (sebasPJ.x >= 660) {
+            sebasPJ.x = -60;
+          }
+        }
+        if (sebasPJ.tocar(obj)) {
+          console.log("fola");
+          obj.x = Math.random() * 580;
+          obj.y = Math.random() * 580;
+        }
+      }
 
-    function pintar(){
-        ctx.fillStyle = "antiquewhite";
-            ctx.strokeRect(0, 0, 600, 600);
-            ctx.fillRect(0, 0, 600, 600);
+      function pintar() {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(0, 0, 600, 600);
 
-            color = getRandomColor();
+        //El jugador
+        ctx.fillStyle = sebasPJ.col;
+        ctx.strokeRect(sebasPJ.x, sebasPJ.y, sebasPJ.width, sebasPJ.height);
+        ctx.fillRect(sebasPJ.x, sebasPJ.y, sebasPJ.width, sebasPJ.height);
+        //El que se mueve
+        ctx.fillStyle = obj.col;
+        ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
+        ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
 
-            ctx.fillStyle = color;
-            ctx.strokeRect(x, y, 100, 100);
-            ctx.fillRect(x, y, 100, 100);
-            update()
-            requestAnimationFrame(pintar)
-            fillText("Velocidad" + speed, 120, 30)
-    }
+        color = getRandomColor();
+        update();
+        requestAnimationFrame(pintar);
+        ctx.fillText("Velocidad" + speed, 420, 30);
+      }
 
-    requestAnimationFrame(pintar)
+      requestAnimationFrame(pintar);
 
-    function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
         for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+          color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
-        }
+      }
 
-    (function () {
-    var requestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame;
-    window.requestAnimationFrame = requestAnimationFrame;
-    })();
-
-
+      (function () {
+        var requestAnimationFrame =
+          window.requestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.msRequestAnimationFrame;
+        window.requestAnimationFrame = requestAnimationFrame;
+      })();
     </script>
-    
-</body>
+  </body>
 </html>

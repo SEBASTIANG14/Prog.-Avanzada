@@ -1,265 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clase #1</title>
     <style>
-        canvas{
-            background-color: antiquewhite;
-        }
+      canvas {
+        background-color: antiquewhite;
+      }
     </style>
-</head>
-<body>
-   <canvas id="my_canvas" width="1200" height="600"></canvas>
-   <script type="text/javascript">
+  </head>
+  <body>
+    <canvas id="my_canvas" width="1200" height="600"></canvas>
+    <script type="text/javascript">
+      const my_canvas = document.getElementById("my_canvas");
+      const ctx = my_canvas.getContext("2d");
+      var figura = 1;
+      var direccion = "";
 
-    const my_canvas = document.getElementById('my_canvas')
-     const ctx = my_canvas.getContext('2d')
-     var figura = 1;
-     var direccion ="";
-
-     function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-            for (var i = 0; i < 6; i++ ) {
-                color += letters[Math.round(Math.random() * 15)];
-            }
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF".split("");
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.round(Math.random() * 15)];
+        }
         return color;
-}
+      }
 
-    ctx.font = "60px Georgia";
-    ctx.fillText("Sebastian El Rifle Gorostieta", 400, 80);
-
-    ctx.beginPath();
-        ctx.lineWidth = 2; 
-        ctx.arc(250, 120, 50, 0, Math.PI * 2, true); 
-        ctx.fillStyle = '#FFCC99';
-        ctx.fill();
-        ctx.stroke();
-
-    ctx.beginPath();
-        ctx.arc(250, 50, 70, 0, Math.PI * 1, true); 
-        ctx.fillStyle = '#feffc4';
-        ctx.fill();
-        ctx.stroke();
-        ctx.fillStyle = "#feffc4"
-        ctx.strokeStyle = '#000000';
-        ctx.fillRect(150, 50, 200, 30)
-        ctx.strokeRect(150, 50, 200, 30);
-
-    ctx.beginPath();
-        ctx.arc(234, 110, 5, 0, Math.PI * 2, true); 
-        ctx.fillStyle = '#000000';
-        ctx.fill();
-        ctx.stroke();
-    ctx.beginPath();
-        ctx.arc(264, 110, 5, 0, Math.PI * 2, true); 
-        ctx.fillStyle = '#000000';
-        ctx.fill();
-        ctx.stroke();
-    ctx.beginPath();
-        ctx.arc(248, 125, 5, 0, Math.PI * 2, true); 
-        ctx.fillStyle = '#000000';
-        ctx.fill();
-        ctx.stroke();
-    ctx.beginPath();
-        ctx.arc(248, 145, 20, 0, Math.PI * 1); 
-        ctx.fillStyle = '#000000';
-        ctx.fill();
-        ctx.stroke();
-    ctx.beginPath();
-        ctx.arc(248, 150, 10, 0, Math.PI * 1); 
-        ctx.fillStyle = 'crimson';
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = "#FFCC99"
-        ctx.fillRect(241, 170, 15, 30)
-
-        ctx.fillStyle = "#000000"
-        ctx.fillRect(160, 490, 50, 20)
-        ctx.fillStyle = "#000000"
-        ctx.fillRect(280, 490, 70, 20)
-        
-        ctx.fillStyle = "#FFCC99"
-        ctx.fillRect(210, 430, 20, 80)
-        ctx.fillStyle = "#FFCC99"
-        ctx.fillRect(280, 430, 20, 80)
-
-        // Dibujar las piernas
-        ctx.fillStyle = "#000000"
-        ctx.fillRect(200, 380, 40, 70)
-        ctx.fillStyle = "#000000"
-        ctx.fillRect(270, 380, 40, 70)
-        
-
+      my_canvas.addEventListener("click", function (e) {
         ctx.beginPath();
-        ctx.ellipse(250, 300, 80, 120, 0, 0, Math.PI * 2); 
-        ctx.fillStyle = '#b5bfcf';
-        ctx.fill();
-        ctx.stroke();
-
-        var imagen = new Image();
-        imagen.src = "horse2.png"
-
-        imagen.onload = function(){
-        ctx.drawImage(imagen, 170,210,150,150)
-        }
-        
-
-        ctx.beginPath();
-        ctx.moveTo(170, 250);
-        ctx.lineTo(110, 300); 
-        ctx.moveTo(330, 250);
-        ctx.lineTo(390, 300); 
-        ctx.lineWidth = 20;
-        ctx.strokeStyle = '#FFCC99'; 
-        ctx.stroke();
-
-
-      
-
-
-
-
-
-
-/*
-
-     my_canvas.addEventListener("click", function(e){
-        ctx.beginPath();
-        if (figura == 1){
-            ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
-        }else if (figura == 2){
-            ctx.fillRect(e.x - 50, e.y - 50, 100, 100)
-        }
-        ctx.fill();
-        ctx.stroke();
-     });
-     
-     my_canvas.addEventListener("mouseover", function(e){
-        ctx.fillStyle = getRandomColor();
-     });
-
-     my_canvas.addEventListener("mouseout", function(e){
         if (figura == 1) {
-            figura = 2;
-        }else{
-            figura = 1
+          ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+        } else if (figura == 2) {
+          ctx.fillRect(e.x - 50, e.y - 50, 100, 100);
         }
-    });
-    
-    my_canvas.addEventListener("mousemove", function (e) {
+        ctx.fill();
+        ctx.stroke();
+      });
+
+      my_canvas.addEventListener("mouseover", function (e) {
+        ctx.fillStyle = getRandomColor();
+      });
+
+      my_canvas.addEventListener("mouseout", function (e) {
+        if (figura == 1) {
+          figura = 2;
+        } else {
+          figura = 1;
+        }
+      });
+
+      my_canvas.addEventListener("mousemove", function (e) {
         const x = e.offsetX;
         const y = e.offsetY;
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, 2 * Math.PI);
         ctx.fill();
-        
-    });
-    
-    my_canvas.addEventListener("mousedown", function (e) {
-        
+      });
+
+      my_canvas.addEventListener("mousedown", function (e) {
         const x = e.offsetX;
         const y = e.offsetY;
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, 2 * Math.PI);
         ctx.fill();
-        
-    });
+      });
 
-    function update(){
+      function update() {}
 
-    }
+      function pintas() {}
 
-    function pintas(){
+      my_canvas.addEventListener("mousemove", function (e) {
+        console.log("hola");
+      });
+      my_canvas.addEventListener("mousedown", function (e) {
+        console.log("hola");
+      });
+      my_canvas.addEventListener("mouseup", function (e) {
+        console.log("hola");
+      });
+      /*
+      ctx.strokeRect(20, 20, 100, 100);
 
-    }
-     
-     my_canvas.addEventListener("mousemove", function(e){
-        console.log("hola")
-     });
-     my_canvas.addEventListener("mousedown", function(e){
-        console.log("hola")
-     });
-     my_canvas.addEventListener("mouseup", function(e){
-        console.log("hola")
-     });
-     
-    
-     
-     ctx.strokeRect(20, 20, 100, 100)
+      ctx.fillStyle = "#9dff6f";
+      ctx.fillRect(100, 100, 100, 100);
 
-     ctx.fillStyle = "#9dff6f"
-     ctx.fillRect(100, 100, 100, 100)
+      ctx.fillStyle = "#6ffff8";
+      ctx.fillRect(180, 180, 100, 100);
 
-     ctx.fillStyle = "#6ffff8"
-     ctx.fillRect(180, 180, 100, 100)
+      ctx.fillStyle = "rgba(255, 2500, 156, 0.5)";
+      ctx.fillRect(260, 260, 100, 100);
 
-     ctx.fillStyle = "rgba(255, 2500, 156, 0.5)"
-     ctx.fillRect(260, 260, 100, 100)
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "#ff8900";
+      ctx.strokeRect(340, 340, 100, 100);
 
-     ctx.lineWidth = 4;
-     ctx.strokeStyle = "#ff8900"
-     ctx.strokeRect(340, 340, 100, 100)
+      ctx.beginPath();
+      ctx.moveTo(320, 10);
+      ctx.lineTo(320, 150);
+      ctx.closePath();
+      ctx.stroke();
 
-     ctx.beginPath()
-     ctx.moveTo(320,10)
-     ctx.lineTo(320,150)
-     ctx.closePath();
-     ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(100, 400);
+      ctx.lineTo(140, 500);
+      ctx.lineTo(300, 500);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
 
-     ctx.beginPath()
-     ctx.moveTo(100,400)
-     ctx.lineTo(140,500)
-     ctx.lineTo(300,500)
-     ctx.closePath();
-     ctx.stroke()
-     ctx.fill()
-
-     ctx.fillStyle = "#9b0294"
-     ctx.beginPath();
+      ctx.fillStyle = "#9b0294";
+      ctx.beginPath();
       ctx.arc(600, 175, 70, 0, 2 * Math.PI);
       ctx.stroke();
       ctx.fill();
 
-    ctx.strokeStyle = "#000000"
-    ctx.beginPath();
-    ctx.arc(600, 175, 20, 0, 1.5 * Math.PI);
-    ctx.stroke();
+      ctx.strokeStyle = "#000000";
+      ctx.beginPath();
+      ctx.arc(600, 175, 20, 0, 1.5 * Math.PI);
+      ctx.stroke();
 
-    ctx.font = "40px Cursive";
-    ctx.fillText("Hello World!", 500, 50);
-    ctx.font = "40px Italic";
-    ctx.strokeStyle = "#000000"
-    ctx.strokeText("Hola Lalo", 490, 390);
-    ctx.stroke();
+      ctx.font = "40px Cursive";
+      ctx.fillText("Hello World!", 500, 50);
+      ctx.font = "40px Italic";
+      ctx.strokeStyle = "#000000";
+      ctx.strokeText("Hola Lalo", 490, 390);
+      ctx.stroke();
 
-    var grd = ctx.createLinearGradient(0,0,500,500)
-    grd.addColorStop(0, "#ff8bfa")
-    grd.addColorStop(0.5, "#ff8b8b");
-    grd.addColorStop(1, "#8bffef")
-    ctx.fillStyle = grd;
-    ctx.fillRect(60,330,300,100);
+      var grd = ctx.createLinearGradient(0, 0, 500, 500);
+      grd.addColorStop(0, "#ff8bfa");
+      grd.addColorStop(0.5, "#ff8b8b");
+      grd.addColorStop(1, "#8bffef");
+      ctx.fillStyle = grd;
+      ctx.fillRect(60, 330, 300, 100);
 
-    const rgrd = ctx.createRadialGradient(930, 230, 100, 930, 290, 170);
+      const rgrd = ctx.createRadialGradient(930, 230, 100, 930, 290, 170);
 
-    rgrd.addColorStop(0, "#ff0000");
-    rgrd.addColorStop(0.3, "#fac457");
-    rgrd.addColorStop(0.5, "#9ffa57");
-    rgrd.addColorStop(0.8, "#57faa8");
-    rgrd.addColorStop(1, "#0061ff");
-    ctx.fillStyle = rgrd;
-    ctx.fillRect(730,100,350,350);
+      rgrd.addColorStop(0, "#ff0000");
+      rgrd.addColorStop(0.3, "#fac457");
+      rgrd.addColorStop(0.5, "#9ffa57");
+      rgrd.addColorStop(0.8, "#57faa8");
+      rgrd.addColorStop(1, "#0061ff");
+      ctx.fillStyle = rgrd;
+      ctx.fillRect(730, 100, 350, 350);
 
-    var imagen = new Image();
-    imagen.src = "cuteAsta.jpg"
+      var imagen = new Image();
+      imagen.src = "cuteAsta.jpg";
 
-    imagen.onload = function(){
-        ctx.drawImage(imagen, 200,200,200,200)
-    }
-*/
-   </script>
-</body>
+      imagen.onload = function () {
+        ctx.drawImage(imagen, 200, 200, 200, 200);
+      };
+      */
+    </script>
+  </body>
 </html>

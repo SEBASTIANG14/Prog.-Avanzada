@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="my_canvas" width="1200" height="600"></canvas>
+    <script type="text/javascript">
+      const my_canvas = document.getElementById("my_canvas");
+      const ctx = my_canvas.getContext("2d");
+      var figura = 1;
+      var direccion = "";
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF".split("");
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.round(Math.random() * 15)];
+        }
+        return color;
+      }
+
+      ctx.font = "60px Georgia";
+      ctx.fillText("Sebastian El Rifle Gorostieta", 400, 80);
+
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.arc(250, 120, 50, 0, Math.PI * 2, true);
+      ctx.fillStyle = "#FFCC99";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(250, 50, 70, 0, Math.PI * 1, true);
+      ctx.fillStyle = "#feffc4";
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#feffc4";
+      ctx.strokeStyle = "#000000";
+      ctx.fillRect(150, 50, 200, 30);
+      ctx.strokeRect(150, 50, 200, 30);
+
+      ctx.beginPath();
+      ctx.arc(234, 110, 5, 0, Math.PI * 2, true);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(264, 110, 5, 0, Math.PI * 2, true);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(248, 125, 5, 0, Math.PI * 2, true);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(248, 145, 20, 0, Math.PI * 1);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(248, 150, 10, 0, Math.PI * 1);
+      ctx.fillStyle = "crimson";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = "#FFCC99";
+      ctx.fillRect(241, 170, 15, 30);
+
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(160, 490, 50, 20);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(280, 490, 70, 20);
+
+      ctx.fillStyle = "#FFCC99";
+      ctx.fillRect(210, 430, 20, 80);
+      ctx.fillStyle = "#FFCC99";
+      ctx.fillRect(280, 430, 20, 80);
+
+      // Dibujar las piernas
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(200, 380, 40, 70);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(270, 380, 40, 70);
+
+      ctx.beginPath();
+      ctx.ellipse(250, 300, 80, 120, 0, 0, Math.PI * 2);
+      ctx.fillStyle = "#b5bfcf";
+      ctx.fill();
+      ctx.stroke();
+
+      var imagen = new Image();
+      imagen.src = "horse2.png";
+
+      imagen.onload = function () {
+        ctx.drawImage(imagen, 170, 210, 150, 150);
+      };
+
+      ctx.beginPath();
+      ctx.moveTo(170, 250);
+      ctx.lineTo(110, 300);
+      ctx.moveTo(330, 250);
+      ctx.lineTo(390, 300);
+      ctx.lineWidth = 20;
+      ctx.strokeStyle = "#FFCC99";
+      ctx.stroke();
+    </script>
+  </body>
+</html>
