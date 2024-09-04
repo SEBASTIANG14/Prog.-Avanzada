@@ -27,7 +27,9 @@
       var x = 200;
       var y = 200;
       var direction = "";
-      var speed = 10;
+      var speed = 5;
+      var muros = [];
+      var pausa = false;
 
       class Rectangulo {
         constructor(x, y, width, height, col, spe) {
@@ -52,9 +54,12 @@
         }
       }
 
-      var sebasPJ = new Rectangulo(200, 200, 50, 50, getRandomColor(), 10);
-      var obj = new Rectangulo(100, 100, 50, 50, getRandomColor(), 10);
-      var obst = new Rectangulo(100, 400, 350, 50, getRandomColor(), 10);
+      var sebasPJ = new Rectangulo(200, 200, 50, 50, getRandomColor(), 5);
+      var obj = new Rectangulo(100, 100, 50, 50, getRandomColor(), 5);
+      var obst = new Rectangulo(100, 400, 350, 50, getRandomColor(), 5);
+
+      muros.push(new Rectangulo(100, 100, 350, 50, getRandomColor(), 10));
+      muros.push(new Rectangulo(200, 300, 150, 50, getRandomColor(), 10));
 
       document.addEventListener("keydown", function (e) {
         if (e.key == "w") {
@@ -68,7 +73,6 @@
         }
         if (e.code == "Space") {
           sebasPJ.spe += 2;
-          console.log(speed);
         }
 
         //pintar();
@@ -101,22 +105,23 @@
           obj.x = Math.random() * 580;
           obj.y = Math.random() * 580;
         }
-
-        if (sebasPJ.tocar(obst)) {
-          if (direction == "up") {
-            sebasPJ.y += sebasPJ.spe;
-          } else if (direction == "left") {
-            sebasPJ.x += sebasPJ.spe;
-          } else if (direction == "down") {
-            sebasPJ.y -= sebasPJ.spe;
-          } else if (direction == "right") {
-            sebasPJ.x -= sebasPJ.spe;
+        muros.forEach(function (muro, i, array) {
+          if (sebasPJ.tocar(muro)) {
+            if (direction == "up") {
+              sebasPJ.y += sebasPJ.spe;
+            } else if (direction == "left") {
+              sebasPJ.x += sebasPJ.spe;
+            } else if (direction == "down") {
+              sebasPJ.y -= sebasPJ.spe;
+            } else if (direction == "right") {
+              sebasPJ.x -= sebasPJ.spe;
+            }
           }
-        }
+        });
       }
 
       function pintar() {
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "#c4ffff";
         ctx.fillRect(0, 0, 600, 600);
 
         //El jugador
@@ -128,9 +133,11 @@
         ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
         ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
         //muro
-        ctx.fillStyle = obst.col;
-        ctx.strokeRect(obst.x, obst.y, obst.width, obst.height);
-        ctx.fillRect(obst.x, obst.y, obst.width, obst.height);
+        muros.forEach(function (muro, i, array) {
+          ctx.fillStyle = muro.col;
+          ctx.strokeRect(muro.x, muro.y, muro.width, muro.height);
+          ctx.fillRect(muro.x, muro.y, muro.width, muro.height);
+        });
 
         color = getRandomColor();
         update();
