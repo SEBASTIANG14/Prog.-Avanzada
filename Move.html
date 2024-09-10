@@ -12,12 +12,6 @@
   </head>
   <body>
     <canvas id="my_canvas" width="600" height="600"></canvas>
-    <img
-      id="images"
-      src="/images.jpg"
-      alt="Descripción de la imagen"
-      style="display: none"
-    />
 
     <script type>
       const my_Canvas = document.getElementById("my_canvas");
@@ -30,6 +24,12 @@
       var speed = 5;
       var muros = [];
       var pausa = false;
+      var puntaje = 0;
+      var imagen = new Image();
+      imagen.src = "chief.png";
+      var imagen1 = new Image();
+      imagen1.src = "grunt.png";
+      const audio = new Audio("alerta.mp3");
 
       class Rectangulo {
         constructor(x, y, width, height, col, spe) {
@@ -54,12 +54,12 @@
         }
       }
 
-      var sebasPJ = new Rectangulo(200, 200, 50, 50, getRandomColor(), 5);
-      var obj = new Rectangulo(100, 100, 50, 50, getRandomColor(), 5);
+      var sebasPJ = new Rectangulo(200, 200, 100, 100, getRandomColor(), 5);
+      var obj = new Rectangulo(100, 100, 60, 60, getRandomColor(), 5);
       var obst = new Rectangulo(100, 400, 350, 50, getRandomColor(), 5);
 
-      muros.push(new Rectangulo(100, 100, 350, 50, getRandomColor(), 10));
-      muros.push(new Rectangulo(200, 300, 150, 50, getRandomColor(), 10));
+      muros.push(new Rectangulo(100, 120, 350, 50, getRandomColor(), 10));
+      muros.push(new Rectangulo(100, 420, 350, 50, getRandomColor(), 10));
 
       document.addEventListener("keydown", function (e) {
         if (e.key == "w") {
@@ -72,38 +72,44 @@
           direction = "right";
         }
         if (e.code == "Space") {
-          sebasPJ.spe += 2;
+          console.log("pausado");
+          pausa = !pausa;
         }
 
         //pintar();
       });
 
       function update() {
-        if (direction == "up") {
-          sebasPJ.y -= sebasPJ.spe;
-          if (sebasPJ.y <= -60) {
-            sebasPJ.y = 660;
-          }
-        } else if (direction == "left") {
-          sebasPJ.x -= sebasPJ.spe;
-          if (sebasPJ.x <= -60) {
-            sebasPJ.x = 660;
-          }
-        } else if (direction == "down") {
-          sebasPJ.y += sebasPJ.spe;
-          if (sebasPJ.y >= 660) {
-            sebasPJ.y = -60;
-          }
-        } else if (direction == "right") {
-          sebasPJ.x += sebasPJ.spe;
-          if (sebasPJ.x >= 660) {
-            sebasPJ.x = -60;
+        if (pausa == true) {
+          if (direction == "up") {
+            sebasPJ.y -= sebasPJ.spe;
+            if (sebasPJ.y <= -60) {
+              sebasPJ.y = 660;
+            }
+          } else if (direction == "left") {
+            sebasPJ.x -= sebasPJ.spe;
+            if (sebasPJ.x <= -60) {
+              sebasPJ.x = 660;
+            }
+          } else if (direction == "down") {
+            sebasPJ.y += sebasPJ.spe;
+            if (sebasPJ.y >= 660) {
+              sebasPJ.y = -60;
+            }
+          } else if (direction == "right") {
+            sebasPJ.x += sebasPJ.spe;
+            if (sebasPJ.x >= 660) {
+              sebasPJ.x = -60;
+            }
           }
         }
         if (sebasPJ.tocar(obj)) {
-          console.log("fola");
-          obj.x = Math.random() * 580;
-          obj.y = Math.random() * 580;
+          audio.currentTime = 1;
+          audio.play();
+          puntaje += 10;
+          sebasPJ.spe += 2;
+          obj.x = Math.random() * 560;
+          obj.y = Math.random() * 560;
         }
         muros.forEach(function (muro, i, array) {
           if (sebasPJ.tocar(muro)) {
@@ -121,17 +127,22 @@
       }
 
       function pintar() {
+        update();
+
         ctx.fillStyle = "#c4ffff";
         ctx.fillRect(0, 0, 600, 600);
-
         //El jugador
         ctx.fillStyle = sebasPJ.col;
-        ctx.strokeRect(sebasPJ.x, sebasPJ.y, sebasPJ.width, sebasPJ.height);
-        ctx.fillRect(sebasPJ.x, sebasPJ.y, sebasPJ.width, sebasPJ.height);
+        ctx.drawImage(
+          imagen,
+          sebasPJ.x,
+          sebasPJ.y,
+          sebasPJ.width,
+          sebasPJ.height
+        );
         //El que se mueve
         ctx.fillStyle = obj.col;
-        ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
-        ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
+        ctx.drawImage(imagen1, obj.x, obj.y, obj.width, obj.height);
         //muro
         muros.forEach(function (muro, i, array) {
           ctx.fillStyle = muro.col;
@@ -139,14 +150,22 @@
           ctx.fillRect(muro.x, muro.y, muro.width, muro.height);
         });
 
+        if (!pausa) {
+          ctx.fillStyle = "gray";
+          ctx.fillRect(0, 0, 600, 600);
+          ctx.fillStyle = "red";
+          ctx.font = "40px Arial";
+          ctx.fillText("P A U S A", 220, 230, 130);
+        }
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("Puntuación: " + puntaje, 400, 50);
+
         color = getRandomColor();
-        update();
         requestAnimationFrame(pintar);
-        ctx.fillText("Velocidad" + speed, 420, 30);
       }
 
       requestAnimationFrame(pintar);
-
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
         var color = "#";
